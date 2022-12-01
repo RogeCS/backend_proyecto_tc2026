@@ -38,7 +38,7 @@ class DiabetesController extends AbstractController{
       try{
           let ans = await db.diabetes.findAll({
             where: {
-              id: req.body.id
+              id: req.query.id
             }
           });
           res.status(200).send(ans);
