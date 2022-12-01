@@ -36,8 +36,8 @@ class DiabetesController extends AbstractController{
 
     private async getReadRecord(req:Request,res:Response){
       try{
-          let ans = await db.diabetes.find({
-            where:{
+          let ans = await db.diabetes.findAll({
+            where: {
               id: req.body.id
             }
           });
