@@ -36,30 +36,30 @@ module.exports = (sequelize: any, DataTypes: any)=>{
         },
         pregnancies:{
             type: DataTypes.INTEGER,
-            allowNull:true,            
+            allowNull:false,            
         },
         glucose:{
           type: DataTypes.INTEGER,
-          allowNull:true,            
+          allowNull:false,            
         },
         bloodPressure:{
           type: DataTypes.INTEGER,
-          allowNull:true,            
+          allowNull:false,            
         },
         skinThickness:{
           type: DataTypes.INTEGER,
-          allowNull:true,            
+          allowNull:false,            
         },
         insulin:{
           type: DataTypes.INTEGER,
-          allowNull:true,            
+          allowNull:false,            
         },
         BMI:{
-          type: DataTypes.INTEGER,
-          allowNull:true,            
+          type: DataTypes.DOUBLE,
+          allowNull:false,            
         },
         DPF:{
-          type: DataTypes.INTEGER,
+          type: DataTypes.DOUBLE,
           allowNull:true,            
         },
         age:{
@@ -72,7 +72,7 @@ module.exports = (sequelize: any, DataTypes: any)=>{
         },
     },{
         sequelize,
-        modelName:'Diabetes'
+        modelName:'diabetes'
     });
     return Diabetes;
 };

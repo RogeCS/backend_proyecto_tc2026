@@ -18,6 +18,7 @@ class DiabetesController extends AbstractController{
 
     protected initRoutes(): void {
         this.router.get('/readRecords',this.getReadRecords.bind(this));
+        this.router.get('/readRecord',this.getReadRecord.bind(this));
         this.router.post('/createRecord',this.postCreateRecord.bind(this))
         this.router.post('/deleteRecord',this.postDeleteRecord.bind(this))
         this.router.post('/updateRecord',this.postUpdateRecord.bind(this))
@@ -25,7 +26,7 @@ class DiabetesController extends AbstractController{
 
     private async getReadRecords(req:Request,res:Response){
         try{
-            let ans = await db.Diabetes.findAll();
+            let ans = await db.diabetes.findAll();
             res.status(200).send(ans);
         }catch(err:any){
             console.log(err);
@@ -33,10 +34,24 @@ class DiabetesController extends AbstractController{
         }
     }
 
+    private async getReadRecord(req:Request,res:Response){
+      try{
+          let ans = await db.diabetes.find({
+            where:{
+              id: req.body.id
+            }
+          });
+          res.status(200).send(ans);
+      }catch(err:any){
+          console.log(err);
+          res.status(500).send("Error fatal:"+err);
+      }
+  }
+
     private async postCreateRecord(req:Request,res:Response){
         try{
             console.log(req.body);
-            await db.Diabetes.create(req.body);
+            await db.diabetes.create(req.body);
             res.status(200).send("Registro exitoso")
         }catch(err:any){
             console.log(err);
@@ -47,7 +62,7 @@ class DiabetesController extends AbstractController{
     private async postDeleteRecord(req:Request,res:Response){
       try{
           console.log(req.body);
-          await db.Diabetes.destroy({
+          await db.diabetes.destroy({
             where:{
               id: req.body.id
             }
@@ -62,7 +77,7 @@ class DiabetesController extends AbstractController{
     private async postUpdateRecord(req:Request,res:Response){
       try{
           console.log(req.body);
-          await db.Diabetes.update({
+          await db.diabetes.update({
             pregnancies: req.body.pregnancies,
             glucose: req.body.glucose,
             bloodPressure: req.body.bloodPressure,
